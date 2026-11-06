@@ -2,39 +2,36 @@
 
 ```mermaid
 classDiagram
-    class EditorTexto {
+    class Contexto {
         -Estrategia estrategia
-        +EditorTexto(Estrategia estrategia)
-        +definirEstrategia(Estrategia estrategia) void
-        +formatar(String texto) String
+        +Contexto(Estrategia estrategia)
+        +definirEstrategia(Estrategia estrategia)
+        +executar() String
     }
 
     class Estrategia {
         <<interface>>
-        +executar(String texto) String
+        +executar() String
     }
 
-    class FormatacaoMaiuscula {
-        +executar(String texto) String
+    class EstrategiaConcretaA {
+        +executar() String
     }
 
-    class FormatacaoMinuscula {
-        +executar(String texto) String
+    class EstrategiaConcretaB {
+        +executar() String
     }
 
-    class FormatacaoComPrefixo {
-        +executar(String texto) String
+    class EstrategiaConcretaC {
+        +executar() String
     }
 
-    EditorTexto o--> Estrategia
-    Estrategia <|.. FormatacaoMaiuscula
-    Estrategia <|.. FormatacaoMinuscula
-    Estrategia <|.. FormatacaoComPrefixo
+    Contexto o--> Estrategia : estrategia atual
+    Estrategia <|.. EstrategiaConcretaA
+    Estrategia <|.. EstrategiaConcretaB
+    Estrategia <|.. EstrategiaConcretaC
 ```
 
-O `EditorTexto` é o Contexto.
-O `Estrategia` representa a interface comum.
-As classes `FormatacaoMaiuscula`, `FormatacaoMinuscula` e
-`FormatacaoComPrefixo` são as Concrete Strategies.
-
-Cada uma implementa o mesmo contrato, mas com regras diferentes.
+O `Contexto` usa a interface `Estrategia`.
+As classes concretas implementam o mesmo contrato com comportamentos
+independentes.
